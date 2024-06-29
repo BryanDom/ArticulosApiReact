@@ -1,28 +1,72 @@
-import React from 'react';
-import { Menu, Icon } from 'semantic-ui-react';
+import React from "react";
+import { Menu, Icon } from "semantic-ui-react";
+import { Link, useLocation } from "react-router-dom";
 
 export const SideMenu = ({ children }) => {
+  const { pathname } = useLocation();
+  console.log(pathname);
+
   return (
     <div className="d-flex">
-      <SideMenuLeft />
-      <div className="main-content flex-grow-1 p-5" style={{ marginLeft: '250px', backgroundColor: '#f8f9fa' }}>
+      <SideMenuLeft pathname={pathname} />
+      <div
+        className="main-content flex-grow-1 p-5"
+        style={{ marginLeft: "250px", backgroundColor: "#f8f9fa" }}
+      >
         {children}
       </div>
     </div>
   );
 };
 
-const SideMenuLeft = () => {
+const SideMenuLeft = (props) => {
+  const { pathname } = props;
   return (
-    <Menu fixed='left' borderless className="side-menu vertical bg-dark text-white" style={{ width: '250px', overflow: 'hidden', paddingTop: '6em', zIndex: 99 }}>
-      <Menu.Item className="text-white">
-        <Icon name="home" className="mr-2" /> Articulos
+    <Menu
+      fixed="left"
+      borderless
+      className="side-menu vertical bg-dark text-white"
+      style={{
+        width: "250px",
+        overflow: "hidden",
+        paddingTop: "6em",
+        zIndex: 99,
+      }}
+    >
+      {/* nos hará viajar al home principal */}
+      <Menu.Item
+        as={Link}
+        to="/admin"
+        active={pathname === "/admin"}
+        className={`text-white ${
+          pathname === "/admin" ? "bg-primary text-white" : ""
+        }`}
+      >
+        <Icon name="home" className="mr-2" /> Home
       </Menu.Item>
-      <Menu.Item className="text-white">
+
+      {/* nos hará viajar al home principal */}
+      <Menu.Item
+        as={Link}
+        to="/admin/articulos"
+        active={pathname === "/admin/articulos"}
+        className={`text-white ${
+          pathname === "/admin/articulos" ? "bg-primary text-white" : ""
+        }`}
+      >
+        <Icon name="archive" className="mr-2" /> Articulos
+      </Menu.Item>
+
+      {/* nos hará viajar al home principal */}
+      <Menu.Item
+        as={Link}
+        to="/admin/users"
+        active={pathname === "/admin/users"}
+        className={`text-white ${
+          pathname === "/admin/users" ? "bg-primary text-white" : ""
+        }`}
+      >
         <Icon name="user" className="mr-2" /> Usuarios
-      </Menu.Item>
-      <Menu.Item className="text-white">
-        <Icon name="settings" className="mr-2" /> Configuración
       </Menu.Item>
     </Menu>
   );
