@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, Icon } from "semantic-ui-react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../../../hooks";
 
 export const SideMenu = ({ children }) => {
   const { pathname } = useLocation();
@@ -21,6 +22,9 @@ export const SideMenu = ({ children }) => {
 
 const SideMenuLeft = (props) => {
   const { pathname } = props;
+  //   sacamos el auth del hook useAuth para restringir el acceso a las rutas
+  const { auth } = useAuth();
+
   return (
     <Menu
       fixed="left"
@@ -57,17 +61,19 @@ const SideMenuLeft = (props) => {
         <Icon name="archive" className="mr-2" /> Articulos
       </Menu.Item>
 
-      {/* nos hará viajar al home principal */}
-      <Menu.Item
-        as={Link}
-        to="/admin/users"
-        active={pathname === "/admin/users"}
-        className={`text-white ${
-          pathname === "/admin/users" ? "bg-primary text-white" : ""
-        }`}
-      >
-        <Icon name="user" className="mr-2" /> Usuarios
-      </Menu.Item>
+      {/* en el menu de user la restringimos si es staff y superuser */}
+      {auth.response.is_superuser && (
+        <Menu.Item
+          as={Link}
+          to="/admin/users"
+          active={pathname === "/admin/users"}
+          className={`text-white ${
+            pathname === "/admin/users" ? "bg-primary text-white" : ""
+          }`}
+        >
+          <Icon name="user" className="mr-2" /> Usuarios
+        </Menu.Item>
+      )}
     </Menu>
   );
 };
