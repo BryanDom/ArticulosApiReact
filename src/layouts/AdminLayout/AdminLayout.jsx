@@ -1,6 +1,6 @@
 import {LoginAdmin} from "../../pages/Admin"
 import { useAuth } from "../../hooks";
-import { TopMenu } from "../../components/Admin";
+import { TopMenu, SideMenu } from "../../components/Admin";
 
 
 export const AdminLayout = (props) => {
@@ -14,15 +14,18 @@ export const AdminLayout = (props) => {
     if (!auth) return  < LoginAdmin />;
 
     // si esta logeado ahora ejecuta eso
-  return (
-    <div className="admin-layout">
-      <div className="admin-layout__menu">
-        <TopMenu/>
+    return (
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-12">
+            <TopMenu />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-2 bg-light">
+            <SideMenu>{children}</SideMenu>
+          </div>
+        </div>
       </div>
-
-      <div className="admin-layout__main-content">
-        {children}
-      </div>
-    </div>
-  )
-}
+    );
+  };
