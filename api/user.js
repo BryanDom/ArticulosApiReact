@@ -42,3 +42,80 @@ export async function getMeApi(token){
         throw error;
     }
 }
+
+// esta funcion se encarga de hacer la petición a la API para obtener los datos de un usuario
+// se le pasa el token del usuario logueado para que la API sepa que usuario es el que esta haciendo la petición
+export async function getUserApi(token){
+    try{
+        const url = `${BASE_API_URL}/api/users/`;
+        const params = {
+            headers: {
+                // asi es como se envia una petición autorizada
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const response = await fetch(url, params);
+        const result = await response.json();
+        return result;
+    }catch (error){
+        throw error;
+    }
+}
+
+// esta funcion se encarga de hacer la petición a la API para obtener los datos de un usuario
+// se le pasa el token del usuario logueado para que la API sepa que usuario es el que esta haciendo la petición
+export async function addUsersApi(data, token){
+    try{
+        const url = `${BASE_API_URL}/api/users/`;
+        const params = {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        };
+        const response = await fetch(url, params);
+        const result = await response.json();
+        return result;
+    }catch (error){
+        throw error;
+    }
+}
+
+export async function updatedUserApi(id, data, token){
+    try{
+        const url = `${BASE_API_URL}/api/users/${id}/`;
+        const params = {
+            // es metodo patch porque solo se actualiza un campo del usuario
+            method: 'PATCH',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        };
+        const response = await fetch(url, params);
+        const result = await response.json();
+        return result;
+    }catch (error){
+        throw error;
+    }
+}
+
+export async function deleteUserApi(id, token){
+    try{
+        const url = `${BASE_API_URL}/api/users/${id}/`;
+        const params = {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const response = await fetch(url, params);
+        const result = await response.json();
+        return result;
+    }catch (error){
+        throw error;
+    }
+}

@@ -1,4 +1,3 @@
-import "./ClientLayout.scss";
 
 
 export const ClientLayout = (props) => {

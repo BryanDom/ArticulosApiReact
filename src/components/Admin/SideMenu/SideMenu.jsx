@@ -8,18 +8,16 @@ export const SideMenu = ({ children }) => {
   console.log(pathname);
 
   return (
-    <div className="d-flex">
+    <div>
       <SideMenuLeft pathname={pathname} />
       <div
-        className="main-content flex-grow-1 p-5"
-        style={{ marginLeft: "250px", backgroundColor: "#f8f9fa" }}
+        style={{ marginLeft: "270px", marginTop: "80px", backgroundColor: "#f8f9fa" }}
       >
         {children}
       </div>
     </div>
   );
 };
-
 const SideMenuLeft = (props) => {
   const { pathname } = props;
   //   sacamos el auth del hook useAuth para restringir el acceso a las rutas

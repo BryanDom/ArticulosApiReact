@@ -22,7 +22,7 @@ export const AdminLayout = (props) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-2 bg-light">
+          <div className="bg-light">
             <SideMenu>{children}</SideMenu>
           </div>
         </div>
