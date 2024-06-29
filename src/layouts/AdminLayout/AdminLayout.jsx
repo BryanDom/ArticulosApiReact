@@ -1,5 +1,6 @@
 import {LoginAdmin} from "../../pages/Admin"
 import { useAuth } from "../../hooks";
+import { TopMenu } from "../../components/Admin";
 
 
 export const AdminLayout = (props) => {
@@ -14,8 +15,14 @@ export const AdminLayout = (props) => {
 
     // si esta logeado ahora ejecuta eso
   return (
-    (<div>
-        <p>AdminLayout</p>{children}
-    </div>)
+    <div className="admin-layout">
+      <div className="admin-layout__menu">
+        <TopMenu/>
+      </div>
+
+      <div className="admin-layout__main-content">
+        {children}
+      </div>
+    </div>
   )
 }
